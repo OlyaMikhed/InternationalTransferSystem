@@ -5,6 +5,16 @@ plugins {
 	id 'java'
 }
 
+flyway {
+	url = 'jdbc:mysql://localhost:3306/ITS?serverTimezone=UTC'
+	user = 'root'
+	password = 'mikhed97'
+	schemas = ['ITS']
+	placeholders = [
+			'classpath': 'db.migration'
+	]
+}
+
 group = 'by.mikhed'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
