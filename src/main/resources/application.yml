@@ -2,12 +2,12 @@ spring:
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/ITS?serverTimezone=UTC}
     username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:}
+    password: ${DB_PASSWORD:mikhed97}
 
   flyway:
     url: ${DB_URL:jdbc:mysql://localhost:3306/ITS?serverTimezone=UTC}
     user: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:}
+    password: ${DB_PASSWORD:mikhed97}
     enabled: true
     schemas: public
     locations: classpath:db/migration
