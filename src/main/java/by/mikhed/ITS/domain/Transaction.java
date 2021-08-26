@@ -32,10 +32,10 @@ public class Transaction {
     private String status;
 
     @Column(name = "sender_id", nullable = false)
-    private String senderId;
+    private Integer senderId;
 
     @Column(name = "recipient_id")
-    private String recipientId;
+    private Integer recipientId;
 
     @ManyToOne
     @JoinColumn(name = "sender_id", nullable = false, insertable = false,
@@ -102,19 +102,19 @@ public class Transaction {
         this.status = status;
     }
 
-    public String getSenderId() {
+    public Integer getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(String senderId) {
+    public void setSenderId(Integer senderId) {
         this.senderId = senderId;
     }
 
-    public String getRecipientId() {
+    public Integer getRecipientId() {
         return recipientId;
     }
 
-    public void setRecipientId(String recipientId) {
+    public void setRecipientId(Integer recipientId) {
         this.recipientId = recipientId;
     }
 }

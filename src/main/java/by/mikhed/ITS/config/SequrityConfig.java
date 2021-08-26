@@ -22,6 +22,8 @@ public class SequrityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN_ENDPOINTS = "/api/admin/**";
 
+    private static final String USER_ENDPOINTS = "/api/user/**";
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider());
@@ -46,8 +48,8 @@ public class SequrityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(ADMIN_ENDPOINTS)
-                .hasRole("ADMIN")
+                .antMatchers(ADMIN_ENDPOINTS).hasRole("ADMIN")
+                .antMatchers(USER_ENDPOINTS).hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and().httpBasic()
