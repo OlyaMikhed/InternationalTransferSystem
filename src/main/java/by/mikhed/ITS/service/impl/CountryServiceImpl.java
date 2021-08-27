@@ -21,7 +21,7 @@ public class CountryServiceImpl implements CountryService {
     private final CountryDtoToEntityMapper countryDtoToEntityMapper;
 
     @Override
-    public void deleteById(String id) throws EntityNotFoundException{
+    public void deleteById(String id) throws EntityNotFoundException {
         if (countryRepository.findById(id).isEmpty()) {
             throw new EntityNotFoundException("Country with id " + id + " not found");
         }
