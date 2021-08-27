@@ -7,4 +7,5 @@ public class CreateCountryRequest {
 
     private String id;
     private String countryName;
+
 }

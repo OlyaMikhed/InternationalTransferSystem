@@ -9,9 +9,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class CreateTransactionRequest {
 
-    protected BigDecimal sum;
+    private BigDecimal sum;
 
-    protected String currency;
+    private String currency;
 
     protected String nameRecipient;
 

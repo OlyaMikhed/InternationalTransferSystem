@@ -33,11 +33,10 @@ public class CountryAdminController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteById(@AuthenticationPrincipal UserPrincipal user,
                                                       @PathVariable String id) {
-        try{
+        try {
             countryService.deleteById(id);
             return new ResponseEntity<>(new MessageResponse("Deleted successfully"), HttpStatus.OK);
-        }
-        catch (EntityNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return new ResponseEntity<>(new MessageResponse(e.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
