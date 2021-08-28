@@ -19,13 +19,13 @@ public class Transaction {
     @Column(nullable = false)
     private String currency;
 
-    @Column(nullable = false)
+    @Column(name = "name_recipient", nullable = false)
     private String nameRecipient;
 
-    @Column(nullable = false)
+    @Column(name = "surname_recipient", nullable = false)
     private String surnameRecipient;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "transfer_number", nullable = false, unique = true)
     private Integer transferNumber;
 
     @Column(nullable = false)

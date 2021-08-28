@@ -11,5 +11,4 @@ public interface CountryDtoToEntityMapper {
     Country countryDtoToEntity(CreateCountryRequest createCountryRequest);
 
     CountryResponse countryEntityToDto(Country country);
-
 }

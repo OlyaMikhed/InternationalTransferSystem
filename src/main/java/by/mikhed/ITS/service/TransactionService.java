@@ -11,7 +11,6 @@ public interface TransactionService {
 
     TransactionResponse create(UserPrincipal userPrincipal, CreateTransactionRequest createTransactionRequest);
 
-    void update(UserPrincipal userPrincipal, UpdateTransactionRequest updateTransactionRequest)
-            throws NotSenderOfTransferException, IncorrectTransferStatusException;
+    TransactionResponse update(UserPrincipal userPrincipal, UpdateTransactionRequest updateTransactionRequest);
 
 }

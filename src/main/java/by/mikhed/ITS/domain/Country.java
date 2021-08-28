@@ -15,7 +15,7 @@ public class Country {
     @Id
     private String id;
 
-    @Column(name = "countryname", nullable = false)
+    @Column(name = "country_name", nullable = false)
     private String countryName;
 
     @OneToMany(mappedBy = "country")
