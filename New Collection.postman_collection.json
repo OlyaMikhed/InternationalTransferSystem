@@ -13,12 +13,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "111111",
+							"value": "222222",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "admin",
+							"value": "olyam010297",
 							"type": "string"
 						}
 					]
@@ -27,7 +27,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"643\",\r\n    \"countryName\": \"Russia\"\r\n}\r\n",
+					"raw": "{\r\n    \"id\": \"616\",\r\n    \"countryName\": \"Pohjnkml\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/admin/country/643",
+					"raw": "http://localhost:8080/api/admin/country/616",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -81,7 +81,7 @@
 						"api",
 						"admin",
 						"country",
-						"643"
+						"616"
 					]
 				}
 			},
@@ -110,6 +110,51 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"sum\": \"1850.50\",\r\n    \"currency\": \"USD\",\r\n    \"nameRecipient\": \"Natalya\",\r\n    \"surnameRecipient\": \"Dubovskaya\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update transaction",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "333333",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "nata2901",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"transferNumber\": \"1303388791\",\r\n    \"nameRecipient\": \"Nahgbj\",\r\n    \"surnameRecipient\": \"Daytghj\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

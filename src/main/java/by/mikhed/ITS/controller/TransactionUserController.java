@@ -33,13 +33,8 @@ public class TransactionUserController {
     }
 
     @PutMapping
-    public ResponseEntity<MessageResponse> update(@AuthenticationPrincipal UserPrincipal user, @RequestBody UpdateTransactionRequest
+    public ResponseEntity<TransactionResponse> update(@AuthenticationPrincipal UserPrincipal user, @RequestBody UpdateTransactionRequest
             updateTransactionRequest) {
-        try {
-            transactionService.update(user, updateTransactionRequest);
-            return new ResponseEntity<>(new MessageResponse("Updated successfully"), HttpStatus.OK);
-        } catch (NotSenderOfTransferException | IncorrectTransferStatusException e) {
-            return new ResponseEntity<>(new MessageResponse(e.getMessage()), HttpStatus.OK);
-        }
+        return new ResponseEntity<>(transactionService.update(user, updateTransactionRequest), HttpStatus.OK);
     }
 }

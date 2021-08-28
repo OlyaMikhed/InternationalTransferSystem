@@ -22,12 +22,8 @@ public class CountryAdminController {
 
     @PostMapping
     public ResponseEntity<MessageResponse> add(@RequestBody CreateCountryRequest createCountryRequest) {
-        try {
-            countryService.create(createCountryRequest);
-            return new ResponseEntity<>(new MessageResponse("Created successfully"), HttpStatus.CREATED);
-        } catch (CountryAlreadyExistException e) {
-            return new ResponseEntity<>(new MessageResponse(e.getMessage()), HttpStatus.OK);
-        }
+        countryService.create(createCountryRequest);
+        return new ResponseEntity<>(new MessageResponse("Created successfully"), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

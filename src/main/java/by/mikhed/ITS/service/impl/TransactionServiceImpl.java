@@ -11,6 +11,7 @@ import by.mikhed.ITS.repository.TransactionRepository;
 import by.mikhed.ITS.security.UserPrincipal;
 import by.mikhed.ITS.service.TransactionService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -38,21 +39,22 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void update(UserPrincipal userPrincipal, UpdateTransactionRequest updateTransactionRequest)
-            throws NotSenderOfTransferException, IncorrectTransferStatusException{
+    public TransactionResponse update(UserPrincipal userPrincipal, UpdateTransactionRequest
+            updateTransactionRequest) {
         Transaction transaction = transactionRepository.findByTransferNumber(updateTransactionRequest
                 .getTransferNumber()).orElseThrow(() -> new EntityNotFoundException("Transfer with number "
-                + updateTransactionRequest.getTransferNumber() + "not found"));
+                + updateTransactionRequest.getTransferNumber() + " not found"));
 
-            if (!userPrincipal.getId().equals(transaction.getSenderId())) {
-                throw new NotSenderOfTransferException("You aren't the sender of this transfer");
-            }
-            if (transaction.getStatus().equals("Paid")) {
-                throw new IncorrectTransferStatusException("This transfer has already been paid");
-            }
+        if (!userPrincipal.getId().equals(transaction.getSenderId())) {
+            throw new NotSenderOfTransferException("You aren't the sender of this transfer");
+        }
+        if (transaction.getStatus().equals("Paid")) {
+            throw new IncorrectTransferStatusException("This transfer has already been paid");
+        }
 
-            transaction.setNameRecipient(updateTransactionRequest.getNameRecipient());
-            transaction.setSurnameRecipient(updateTransactionRequest.getSurnameRecipient());
-            transactionRepository.save(transaction);
+        transaction.setNameRecipient(updateTransactionRequest.getNameRecipient());
+        transaction.setSurnameRecipient(updateTransactionRequest.getSurnameRecipient());
+        transactionRepository.save(transaction);
+        return transactionDtoToEntityMapper.transactionEntityToDto(transaction);
     }
 }
