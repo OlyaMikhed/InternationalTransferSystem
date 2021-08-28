@@ -13,12 +13,12 @@
 					"basic": [
 						{
 							"key": "password",
-							"value": "222222",
+							"value": "111111",
 							"type": "string"
 						},
 						{
 							"key": "username",
-							"value": "olyam010297",
+							"value": "admin",
 							"type": "string"
 						}
 					]
@@ -27,7 +27,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"616\",\r\n    \"countryName\": \"Pohjnkml\"\r\n}\r\n",
+					"raw": "{\r\n    \"id\": \"112\",\r\n    \"countryName\": \"Belarus\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,13 +139,13 @@
 					"type": "basic",
 					"basic": [
 						{
-							"key": "password",
-							"value": "333333",
+							"key": "username",
+							"value": "olyam010297",
 							"type": "string"
 						},
 						{
-							"key": "username",
-							"value": "nata2901",
+							"key": "password",
+							"value": "222222",
 							"type": "string"
 						}
 					]
@@ -154,7 +154,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"transferNumber\": \"1303388791\",\r\n    \"nameRecipient\": \"Nahgbj\",\r\n    \"surnameRecipient\": \"Daytghj\"\r\n}",
+					"raw": "{\r\n    \"transferNumber\": \"1303388791\",\r\n    \"nameRecipient\": \"Ivan\",\r\n    \"surnameRecipient\": \"Ivanov\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,6 +172,52 @@
 						"api",
 						"user",
 						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paid ",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "333333",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "nata2901",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"transferNumber\": \"526395489\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/transaction/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"transaction",
+						"pay"
 					]
 				}
 			},

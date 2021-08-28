@@ -1,26 +1,32 @@
 package by.mikhed.ITS.service.impl;
 
 import by.mikhed.ITS.domain.Transaction;
+import by.mikhed.ITS.domain.User;
 import by.mikhed.ITS.dto.request.CreateTransactionRequest;
+import by.mikhed.ITS.dto.request.FindTransactionRequest;
 import by.mikhed.ITS.dto.request.UpdateTransactionRequest;
 import by.mikhed.ITS.dto.response.TransactionResponse;
 import by.mikhed.ITS.exception.IncorrectTransferStatusException;
 import by.mikhed.ITS.exception.NotSenderOfTransferException;
+import by.mikhed.ITS.exception.WrongNameException;
 import by.mikhed.ITS.mapper.TransactionDtoToEntityMapper;
 import by.mikhed.ITS.repository.TransactionRepository;
+import by.mikhed.ITS.repository.UserRepository;
 import by.mikhed.ITS.security.UserPrincipal;
 import by.mikhed.ITS.service.TransactionService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
+
+    private final UserRepository userRepository;
 
     private final TransactionDtoToEntityMapper transactionDtoToEntityMapper;
 
@@ -56,5 +62,25 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setSurnameRecipient(updateTransactionRequest.getSurnameRecipient());
         transactionRepository.save(transaction);
         return transactionDtoToEntityMapper.transactionEntityToDto(transaction);
+    }
+
+    @Override
+    public void receipt(UserPrincipal userPrincipal, FindTransactionRequest findTransactionRequest) {
+        Transaction transaction = transactionRepository.findByTransferNumber(findTransactionRequest
+                .getTransferNumber()).orElseThrow(() -> new EntityNotFoundException("Transfer with number "
+                + findTransactionRequest.getTransferNumber() + " not found"));
+
+        Optional<User> user = userRepository.findById(userPrincipal.getId());
+
+        if ((!transaction.getNameRecipient().equals(user.get().getNameUser())) ||
+                !transaction.getSurnameRecipient().equals(user.get().getSurnameUser())) {
+            throw new WrongNameException("You aren't the recipient of this transfer");
+        }
+        if (transaction.getStatus().equals("Paid")) {
+            throw new IncorrectTransferStatusException("This transfer has already been paid");
+        }
+        transaction.setRecipientId(userPrincipal.getId());
+        transaction.setStatus("Paid");
+        transactionRepository.save(transaction);
     }
 }
