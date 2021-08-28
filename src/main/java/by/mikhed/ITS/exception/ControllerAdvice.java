@@ -76,4 +76,19 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(WrongNameException.class)
+    public final ResponseEntity<Map<String, Object>> handleWrongNameException(
+            WrongNameException ex, WebRequest request) {
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("timestamp", LocalDateTime.now());
+        List<Map<String, String>> errors = new ArrayList<>();
+        Map<String, String> error = new HashMap<>();
+        error.put("message", ex.getMessage());
+        errors.add(error);
+        response.put("errors", errors);
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }

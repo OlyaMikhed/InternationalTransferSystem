@@ -1,6 +1,7 @@
 package by.mikhed.ITS.controller;
 
 import by.mikhed.ITS.dto.request.CreateTransactionRequest;
+import by.mikhed.ITS.dto.request.FindTransactionRequest;
 import by.mikhed.ITS.dto.request.UpdateTransactionRequest;
 import by.mikhed.ITS.dto.response.MessageResponse;
 import by.mikhed.ITS.dto.response.TransactionResponse;
@@ -33,8 +34,15 @@ public class TransactionUserController {
     }
 
     @PutMapping
-    public ResponseEntity<TransactionResponse> update(@AuthenticationPrincipal UserPrincipal user, @RequestBody UpdateTransactionRequest
-            updateTransactionRequest) {
+    public ResponseEntity<TransactionResponse> update(@AuthenticationPrincipal UserPrincipal user,
+                                                      @RequestBody UpdateTransactionRequest updateTransactionRequest) {
         return new ResponseEntity<>(transactionService.update(user, updateTransactionRequest), HttpStatus.OK);
+    }
+
+    @PutMapping("/pay")
+    public ResponseEntity<MessageResponse> receipt(@AuthenticationPrincipal UserPrincipal user,
+                                                   @RequestBody FindTransactionRequest findTransactionRequest) {
+        transactionService.receipt(user, findTransactionRequest);
+        return new ResponseEntity<>(new MessageResponse("Paid successfully"), HttpStatus.OK);
     }
 }
